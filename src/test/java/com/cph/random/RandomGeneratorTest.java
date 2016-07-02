@@ -27,18 +27,20 @@ import static org.junit.Assert.assertThat;
  */
 public class RandomGeneratorTest {
 
+	private static String EMAIL_REGEX = ".*@.*\\.com";
+
 	@Test
 	public void testGetRandomEmail() {
 		String email = RandomGenerator.getRandomEmail();
 		assertNotNull(email);
-		assertThat(email.matches(".*@.*\\.com"), is(true));
+		assertThat(email.matches(EMAIL_REGEX), is(true));
 	}
 
 	@Test
 	public void testGetRandomUniqueEmailWithoutDash() {
 		String email = RandomGenerator.getRandomEmailWithoutDash();
 		assertNotNull(email);
-		assertThat(email.matches(".*@.*\\.com"), is(true));
+		assertThat(email.matches(EMAIL_REGEX), is(true));
 		assertThat(email.contains("-"), is(false));
 	}
 }
