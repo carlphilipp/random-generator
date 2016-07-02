@@ -26,9 +26,9 @@ import java.util.regex.Pattern;
  */
 public class RandomGenerator {
 
-	private static final Random RANDOM = new Random();
 	static final String PHONE_NUMBER_REGEX = "^(1-?)?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})-?[2-9]\\d{2}-?\\d{4}$";
 	private static final Pattern PATTERN_PHONE_NUMBER = Pattern.compile(PHONE_NUMBER_REGEX);
+	private static final Random RANDOM = new Random();
 
 	public static String getRandomEmail() {
 		return UUID.randomUUID().toString() + "@" + UUID.randomUUID().toString() + ".com";
