@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
  * @author cpharmant
  * @since 0.0.1
  */
-public class RandomGeneratorTest {
+public class RandomEmailTest {
 
 	private static String EMAIL_REGEX = ".*@.*\\.com";
 
