@@ -30,23 +30,25 @@ public class RandomGenerator {
 	private static final Pattern PATTERN_PHONE_NUMBER = Pattern.compile(PHONE_NUMBER_REGEX);
 	private static final Random RANDOM = new Random();
 
-	public static String getRandomEmail() {
+	// Emails
+	public static String generateEmail() {
 		return UUID.randomUUID().toString() + "@" + UUID.randomUUID().toString() + ".com";
 	}
 
-	public static String getRandomEmailWithoutDash() {
-		return getRandomEmail().replace("-", "");
+	public static String generateEmailWithoutDash() {
+		return generateEmail().replace("-", "");
 	}
 
-	public static String getRandomPhoneNumber() {
-		String phoneNumber = generatePhoneNumber();
+	// Phone numbers
+	public static String generatePhoneNumber() {
+		String phoneNumber = tryToGenerateValidPhoneNumber();
 		while (!isValidUSPhoneNumber(phoneNumber)) {
-			phoneNumber = generatePhoneNumber();
+			phoneNumber = tryToGenerateValidPhoneNumber();
 		}
 		return phoneNumber;
 	}
 
-	private static String generatePhoneNumber() {
+	private static String tryToGenerateValidPhoneNumber() {
 		final int areaCode = generateRandomNumberInRange(0, 1000);
 		final int subscriberNumber = generateRandomNumberInRange(0, 10_000_000);
 		return String.format("%03d", areaCode) + String.format("%07d", subscriberNumber);

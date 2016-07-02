@@ -30,15 +30,15 @@ public class RandomEmailTest {
 	private static String EMAIL_REGEX = ".*@.*\\.com";
 
 	@Test
-	public void testGetRandomEmail() {
-		String email = RandomGenerator.getRandomEmail();
+	public void testGenerateEmail() {
+		String email = RandomGenerator.generateEmail();
 		assertNotNull(email);
 		assertThat(email.matches(EMAIL_REGEX), is(true));
 	}
 
 	@Test
-	public void testGetRandomUniqueEmailWithoutDash() {
-		String email = RandomGenerator.getRandomEmailWithoutDash();
+	public void testGenerateEmailWithoutDash() {
+		String email = RandomGenerator.generateEmailWithoutDash();
 		assertNotNull(email);
 		assertThat(email.matches(EMAIL_REGEX), is(true));
 		assertThat(email.contains("-"), is(false));

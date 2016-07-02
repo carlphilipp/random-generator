@@ -43,7 +43,7 @@ public class RandomPhoneNumberTest {
 
 	@Test
 	public void test() {
-		final String phoneNumber = RandomGenerator.getRandomPhoneNumber();
+		final String phoneNumber = RandomGenerator.generatePhoneNumber();
 		assertNotNull("Phone number generated null", phoneNumber);
 		assertThat("Phone number generated is not valid",
 				phoneNumber.matches(RandomGenerator.PHONE_NUMBER_REGEX),
