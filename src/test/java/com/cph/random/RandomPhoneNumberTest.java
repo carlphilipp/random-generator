@@ -16,6 +16,11 @@
 package com.cph.random;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -25,20 +30,23 @@ import static org.junit.Assert.assertThat;
  * @author cpharmant
  * @since 0.0.1
  */
-public class RandomGeneratorTest {
+@RunWith(Parameterized.class)
+public class RandomPhoneNumberTest {
 
-	@Test
-	public void testGetRandomEmail() {
-		String email = RandomGenerator.getRandomEmail();
-		assertNotNull(email);
-		assertThat(email.matches(".*@.*\\.com"), is(true));
+	public RandomPhoneNumberTest() {
+	}
+
+	@Parameterized.Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[1000][0]);
 	}
 
 	@Test
-	public void testGetRandomUniqueEmailWithoutDash() {
-		String email = RandomGenerator.getRandomEmailWithoutDash();
-		assertNotNull(email);
-		assertThat(email.matches(".*@.*\\.com"), is(true));
-		assertThat(email.contains("-"), is(false));
+	public void test() {
+		final String phoneNumber = RandomGenerator.getRandomPhoneNumber();
+		assertNotNull("Phone number generated null", phoneNumber);
+		assertThat("Phone number generated is not valid",
+				phoneNumber.matches(RandomGenerator.PHONE_NUMBER_REGEX),
+				is(true));
 	}
 }

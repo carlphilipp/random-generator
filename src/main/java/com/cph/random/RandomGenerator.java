@@ -15,7 +15,10 @@
  */
 package com.cph.random;
 
+import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author cpharmant
@@ -23,11 +26,38 @@ import java.util.UUID;
  */
 public class RandomGenerator {
 
-	public static String getRandomUniqueEmail() {
+	private static final Random RANDOM = new Random();
+	static final String PHONE_NUMBER_REGEX = "^(1-?)?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})-?[2-9]\\d{2}-?\\d{4}$";
+	private static final Pattern PATTERN_PHONE_NUMBER = Pattern.compile(PHONE_NUMBER_REGEX);
+
+	public static String getRandomEmail() {
 		return UUID.randomUUID().toString() + "@" + UUID.randomUUID().toString() + ".com";
 	}
 
-	public static String getRandomUniqueEmailWithoutDash() {
-		return getRandomUniqueEmail().replace("-", "");
+	public static String getRandomEmailWithoutDash() {
+		return getRandomEmail().replace("-", "");
+	}
+
+	public static String getRandomPhoneNumber() {
+		String phoneNumber = generatePhoneNumber();
+		while (!isValidUSPhoneNumber(phoneNumber)) {
+			phoneNumber = generatePhoneNumber();
+		}
+		return phoneNumber;
+	}
+
+	private static String generatePhoneNumber() {
+		final int areaCode = generateRandomNumberInRange(0, 1000);
+		final int subscriberNumber = generateRandomNumberInRange(0, 10_000_000);
+		return String.format("%03d", areaCode) + String.format("%07d", subscriberNumber);
+	}
+
+	private static int generateRandomNumberInRange(final int lower, final int upper) {
+		return RANDOM.nextInt(upper - lower) + lower;
+	}
+
+	private static boolean isValidUSPhoneNumber(final String phoneNumber) {
+		final Matcher matcher = PATTERN_PHONE_NUMBER.matcher(phoneNumber);
+		return matcher.find();
 	}
 }
