@@ -99,8 +99,4 @@ public class RandomGenerator {
 		final Path path = Paths.get(RandomGenerator.class.getClassLoader().getResource("first_name.csv").getPath());
 		return Files.readAllLines(path);
 	}
-
-	public static String generateRandomString() {
-		return UUID.randomUUID().toString().replace("-", "");
-	}
 }
