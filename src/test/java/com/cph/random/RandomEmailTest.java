@@ -34,11 +34,12 @@ public class RandomEmailTest {
 		String email = RandomGenerator.generateEmail();
 		assertNotNull(email);
 		assertThat(email.matches(EMAIL_REGEX), is(true));
+		assertThat(email.contains("-"), is(true));
 	}
 
 	@Test
 	public void testGenerateEmailWithoutDash() {
-		String email = RandomGenerator.generateEmailWithoutDash();
+		String email = RandomGenerator.generateEmailWithoutDashes();
 		assertNotNull(email);
 		assertThat(email.matches(EMAIL_REGEX), is(true));
 		assertThat(email.contains("-"), is(false));

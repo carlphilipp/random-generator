@@ -48,7 +48,7 @@ public class RandomGenerator {
 		return UUID.randomUUID().toString() + "@" + UUID.randomUUID().toString() + ".com";
 	}
 
-	public static String generateEmailWithoutDash() {
+	public static String generateEmailWithoutDashes() {
 		return generateEmail().replace("-", "");
 	}
 
@@ -76,12 +76,13 @@ public class RandomGenerator {
 		return matcher.find();
 	}
 
-	// Names
+	// First names
 	public static String generateFirstName() {
 		final int max = getFistNames().size();
 		return getFistNames().get(RANDOM.nextInt(max));
 	}
 
+	// Last names
 	public static String generateLastName() {
 		final int max = getLastNames().size();
 		return getLastNames().get(RANDOM.nextInt(max));

@@ -20,6 +20,5 @@ public class RandomNamesTest {
 	public void testGenerateLastName() {
 		String lastName = RandomGenerator.generateLastName();
 		assertNotNull(lastName);
-		String lastName2 = RandomGenerator.generateLastName();
 	}
 }
