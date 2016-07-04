@@ -46,7 +46,7 @@ public class RandomPhoneNumberTest {
 		final String phoneNumber = RandomGenerator.generatePhoneNumber();
 		assertNotNull("Phone number generated null", phoneNumber);
 		assertThat("Phone number generated is not valid",
-				phoneNumber.matches(RandomGenerator.PHONE_NUMBER_REGEX),
-				is(true));
+			phoneNumber.matches(RandomGenerator.PHONE_NUMBER_REGEX),
+			is(true));
 	}
 }

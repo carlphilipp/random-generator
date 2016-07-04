@@ -15,6 +15,14 @@
  */
 package com.cph.random;
 
+import lombok.Getter;
+import lombok.SneakyThrows;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -29,6 +37,11 @@ public class RandomGenerator {
 	static final String PHONE_NUMBER_REGEX = "^(1-?)?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})-?[2-9]\\d{2}-?\\d{4}$";
 	private static final Pattern PATTERN_PHONE_NUMBER = Pattern.compile(PHONE_NUMBER_REGEX);
 	private static final Random RANDOM = new Random();
+
+	@Getter(lazy = true)
+	private static final List<String> lastNames = loadLastNames();
+	@Getter(lazy = true)
+	private static final List<String> fistNames = loadFirstNames();
 
 	// Emails
 	public static String generateEmail() {
@@ -61,5 +74,28 @@ public class RandomGenerator {
 	private static boolean isValidUSPhoneNumber(final String phoneNumber) {
 		final Matcher matcher = PATTERN_PHONE_NUMBER.matcher(phoneNumber);
 		return matcher.find();
+	}
+
+	// Names
+	public static String generateFirstName() {
+		final int max = getFistNames().size();
+		return getFistNames().get(RANDOM.nextInt(max));
+	}
+
+	public static String generateLastName() {
+		final int max = getLastNames().size();
+		return getLastNames().get(RANDOM.nextInt(max));
+	}
+
+	@SneakyThrows(IOException.class)
+	private static List<String> loadLastNames() {
+		final Path path = Paths.get(RandomGenerator.class.getClassLoader().getResource("last_name.csv").getPath());
+		return Files.readAllLines(path);
+	}
+
+	@SneakyThrows(IOException.class)
+	private static List<String> loadFirstNames() {
+		final Path path = Paths.get(RandomGenerator.class.getClassLoader().getResource("first_name.csv").getPath());
+		return Files.readAllLines(path);
 	}
 }
